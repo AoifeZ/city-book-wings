@@ -1,19 +1,26 @@
+function getbooks() {
+  //const queryURL = `http://openlibrary.org/search.json?q=london`
 
+  const queryURL = `http://openlibrary.org/subjects/london.json?q=london`;
+  // /subjects/love.json
 
-function getbooks(){
-    const queryURL = `http://openlibrary.org/search.json?q=`
-    
-    fetch(queryURL)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  });
-
+  fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
 }
-getbooks()
+getbooks();
 
+function bookSubject() {
+  var flightdestination = document.getElementById("citysearch").value;
+  alert(flightdestination);
+}
+//bookSubject()
+
+// bookSubject()
 //a form input that allows the user to input a subject(city)
 //when button is clicked
 // onclick="getbooks()"
