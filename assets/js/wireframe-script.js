@@ -9,6 +9,13 @@ document.getElementById('flightSearchForm').addEventListener('submit', function 
 	var locationTo = document.getElementById('locationTo').value;
 	var departureDate = document.getElementById('departureDate').value;
 
+	// Log user entries to the console
+	console.log('---- Flight search input: ----');
+	console.log('From:', locationFrom);
+	console.log('To:', locationTo);
+	console.log('Date:', departureDate);
+	console.log('---- Getting results (please wait...): ----');
+
 	//? API documentation: https://rapidapi.com/ntd119/api/booking-com13
 	//? This next snippet of code is from the API site:
 	const url = `https://booking-com13.p.rapidapi.com/flights/one-way?location_from=${encodeURIComponent(locationFrom)}&location_to=${encodeURIComponent(locationTo)}&departure_date=${departureDate}&page=1`;
@@ -32,7 +39,7 @@ document.getElementById('flightSearchForm').addEventListener('submit', function 
 		})
 		.catch(function (error) {
 			console.error(error); // Log any errors that occur during the fetch
-	});
+		});
 });
 
 // Function to update the search results on the webpage
@@ -48,15 +55,15 @@ function updateSearchResults(results) {
 			resultList.className = 'row'; // Apply Bootstrap row class
 
 			// Loop through each flight result and create a Bootstrap card for display
-			flights.forEach(function (flight) {
+			flights.forEach(function (flights) {
 				// Extract relevant information from the flight data
-				var flightName = flight.bounds[0].segments[0].flightNumber;
-				var airline = flight.bounds[0].segments[0].operatingCarrier.name;
-				var airportFrom = flight.bounds[0].segments[0].origin.cityName;
-				var airportTo = flight.bounds[0].segments[0].destination.cityName;
-				var departureTime = new Date(flight.bounds[0].segments[0].departuredAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-				var arrivalTime = new Date(flight.bounds[0].segments[0].arrivedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-				var price = flight.travelerPrices[0].price.price.value;
+				var flightName = flights.bounds[0].segments[0].flightNumber;
+				var airline = flights.bounds[0].segments[0].operatingCarrier.name;
+				var airportFrom = flights.bounds[0].segments[0].origin.cityName;
+				var airportTo = flights.bounds[0].segments[0].destination.cityName;
+				var departureTime = new Date(flights.bounds[0].segments[0].departuredAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+				var arrivalTime = new Date(flights.bounds[0].segments[0].arrivedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+				var price = flights.travelerPrices[0].price.price.value;
 
 				// Create a Bootstrap card for each flight result
 				var card = document.createElement('div');

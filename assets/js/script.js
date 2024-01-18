@@ -9,6 +9,13 @@ document.getElementById('flightSearchForm').addEventListener('submit', function 
 	var locationTo = document.getElementById('locationTo').value;
 	var departureDate = document.getElementById('departureDate').value;
 
+	// Log user entries to the console
+	console.log('---- Flight search input: ----');
+	console.log('From:', locationFrom);
+	console.log('To:', locationTo);
+	console.log('Date:', departureDate);
+	console.log('---- Getting results (please wait...): ----');
+
 	//? API documentation: https://rapidapi.com/ntd119/api/booking-com13
 	//? This next snippet of code is from the API site:
 	const url = `https://booking-com13.p.rapidapi.com/flights/one-way?location_from=${encodeURIComponent(locationFrom)}&location_to=${encodeURIComponent(locationTo)}&departure_date=${departureDate}&page=1`;
@@ -32,7 +39,7 @@ document.getElementById('flightSearchForm').addEventListener('submit', function 
 		})
 		.catch(function (error) {
 			console.error(error); // Log any errors that occur during the fetch
-	});
+		});
 });
 
 // Function to update the search results on the webpage
