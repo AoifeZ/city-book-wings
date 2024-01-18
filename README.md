@@ -19,7 +19,7 @@ Stick to APIs that do all of the following:
 
 ## Wireframe:
 
-![wireframe](./assets/images/wireframe.png)
+![wireframe](./assets/wireframe/wireframe.png)
 
 
 ## Description
