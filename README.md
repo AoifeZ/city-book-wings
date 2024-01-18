@@ -17,9 +17,9 @@ Stick to APIs that do all of the following:
 * Return a JSON response
 * Are well-documented
 
-## Screenshot:
+## Wireframe:
 
-![screenshot TBC](#)
+![wireframe](./assets/images/wireframe.png)
 
 
 ## Description
