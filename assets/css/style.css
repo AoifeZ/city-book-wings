@@ -63,3 +63,19 @@ span {
   background-color: #d46353;
   transition: color 0.3s ease-in-out;
 }
+
+.footer-style{
+  background-color: #eba18c;
+}
+
+.copyright{
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.footer-links{
+  display: flex;
+  justify-content: center space-around space-evenly;
+  list-style: none;
+  font-size: 25px;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
