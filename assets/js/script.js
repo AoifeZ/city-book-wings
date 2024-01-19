@@ -48,26 +48,26 @@ function updateSearchResults(results) {
 
 	// Check if the API response contains the expected structure and data
 	if (results.status && results.data && results.data.flights) {
-		var flights = results.data.flights.slice(0, 6); // Extract the first six flight results
+		var flights = results.data.flights.slice(0, 4); // Extract the first four flight results
 
 		if (flights.length > 0) {
 			var resultList = document.createElement('div'); // Create a container for result cards
 			resultList.className = 'row'; // Apply Bootstrap row class
 
 			// Loop through each flight result and create a Bootstrap card for display
-			flights.forEach(function (flight) {
+			flights.forEach(function (flights) {
 				// Extract relevant information from the flight data
-				var flightName = flight.bounds[0].segments[0].flightNumber;
-				var airline = flight.bounds[0].segments[0].operatingCarrier.name;
-				var airportFrom = flight.bounds[0].segments[0].origin.cityName;
-				var airportTo = flight.bounds[0].segments[0].destination.cityName;
-				var departureTime = new Date(flight.bounds[0].segments[0].departuredAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-				var arrivalTime = new Date(flight.bounds[0].segments[0].arrivedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-				var price = flight.travelerPrices[0].price.price.value;
+				var flightName = flights.bounds[0].segments[0].flightNumber;
+				var airline = flights.bounds[0].segments[0].operatingCarrier.name;
+				var airportFrom = flights.bounds[0].segments[0].origin.cityName;
+				var airportTo = flights.bounds[0].segments[0].destination.cityName;
+				var departureTime = new Date(flights.bounds[0].segments[0].departuredAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+				var arrivalTime = new Date(flights.bounds[0].segments[0].arrivedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+				var price = flights.travelerPrices[0].price.price.value;
 
 				// Create a Bootstrap card for each flight result
 				var card = document.createElement('div');
-				card.className = 'card col-md-4'; // Apply Bootstrap card and column classes
+				card.className = 'card col m-2 bg-warning'; // Apply Bootstrap card and column classes
 				card.innerHTML =
 					'<div class="card-body">' +
 					'<h5 class="card-title">' + airline + ' - ' + flightName + '</h5>' +
