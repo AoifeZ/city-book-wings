@@ -11,68 +11,72 @@
 	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body>
+<body class="bg-light">
 
 	<!-- Header Section -->
-	<header>
+	<header class="header-section py-3">
 		<div class="container">
-
+			
 			<!-- Nav Section -->
-			<nav class="navbar navbar-expand-lg navbar-light py-3">
+			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container-fluid">
-					<a class="navbar-brand fs-1" href="#">City<span class="text-info">Book</span>Wings</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-						aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<a class="navbar-brand fs-1 text-white" href="#">City<span>Book</span>Wings</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 						<div class="navbar-nav ms-auto text-end fs-5">
-							<a class="nav-item nav-link mx-2" href="#about">About</a>
 							<a class="nav-item nav-link mx-2" href="#flights">Flights</a>
-							<a class="nav-item nav-link mx-2" href="#calendar">Calendar</a>
 							<a class="nav-item nav-link mx-2" href="#books">Books</a>
+							<a class="nav-item nav-link mx-2" href="#calendar">Calendar</a>
+							<a class="nav-item nav-link mx-2" href="#about">About</a>
 						</div>
 					</div>
 				</div>
 			</nav>
+			<hr class="border border-white border-2">
 		</div>
 	</header>
 
 	<!-- Hero Section -->
-	<section>
+	<section class="hero-section pt-5 text-white"
+		style="background-image: url('./assets/images/holiday-globe.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 		<div class="container">
+	
+
+			<!-- Left column -->
 			<div class="row d-flex align-items-center">
-				<!-- Left column -->
 				<div class="col-md-6 center-image">
-					<img src="./assets/images/flight-icon.png" alt="Flight illustration" class="img-fluid">
 				</div>
+
 				<!-- Right column -->
 				<div class="col-md-6 align-items-center my-5">
-					<div class="row mb-5">
-						<h2>Get <span class="text-info">flight information</span> and <span class="text-info">book
-								recommendations</span>
-							for your ideal&nbsp;holiday.</h2>
+					<div class="row mb-4 px-3">
+						<h1>Get <span>flight information</span> and <span>book recommendations</span> for your
+							ideal&nbsp;holiday.</h1>
 					</div>
-						<div class="row">
-					<form id="flightSearchForm">
-						<div class="row mb-3">
-							<div class="col-md-6">
-								<label for="from" class="form-label fw-bold">Depart From:</label>
-								<input type="text" class="form-control" id="locationFrom"
-									placeholder="City, Country (e.g. Dublin, Ireland)" required>
-							</div>
-							<div class="col-md-6">
-								<label for="to" class="form-label fw-bold">Destination:</label>
-								<input type="text" class="form-control" id="locationTo" placeholder="City, Country (e.g Paris, France)"
-									required>
-							</div>
-						</div>
-						<div class="row mb-3">
-							<div class="col-md-6">
-								<label for="departureDate" class="form-label fw-bold">Departure Date:</label>
-								<input type="date" class="form-control" id="departureDate" required>
-							</div> -->
 					<div class="row">
+						<form id="flightSearchForm">
+							<div class="row mb-3 px-3">
+								<div class="col-md-6">
+									<label for="from" class="form-label fw-bold">Depart From:</label>
+									<input type="text" class="form-control" id="locationFrom"
+										placeholder="City, Country (e.g. Dublin, Ireland)" required>
+								</div>
+								<div class="col-md-6">
+									<label for="to" class="form-label fw-bold">Destination:</label>
+									<input type="text" class="form-control" id="locationTo"
+										placeholder="City, Country (e.g Paris, France)" required>
+								</div>
+							</div>
+							<div class="row mb-3 px-3">
+								<div class="col-md-6">
+									<label for="departureDate" class="form-label fw-bold">Departure Date:</label>
+									<input type="date" class="form-control" id="departureDate" required>
+								</div>
+                <div class="row">
 						<div class="input-group">
 							<input type="text" id="citySearch" class="form-control" placeholder="Where do you want to go?">
 						<button onclick="bookSubject()" class="btn btn-info fs-5" type="button"> 	
@@ -89,38 +93,37 @@
 	</section>
 
 	<!-- Main Content Section -->
-	<main class="container">
+	<main>
+		<div class="container">
 
-		<!-- Flight Search Results Section -->
-		<section id="flights" class="border border-2 my-5 p-5 bg-light">
-			<h2 class="mb-5">Search Results:</h2>
-			<div id="searchResults">
-				<div class="spinner-border" role="status">
-					<span class="visually-hidden">Loading...</span>
-				</div>
-				<p class="fs-4 my-3 text-danger">Loading... the flight API takes a minute to show results.</p>
-				<p class="fs-4 my-3 text-danger">Check console for errors if nothing loads.</p>
-				<!-- Flight results will be displayed here -->
-			</div>
-		</section>
-
-		<!-- Blurb Section -->
-		<section id="blurb" class="my-5 p-5 text-center">
-			<p class="fs-5 mt-3">
-				We believe that for <strong>amazing trips</strong>, you need <strong>amazing books</strong>, so here are our recommended books for your	destination:
-			</p>
-		</section>
-
-			<!-- Book Data Section -->
-			<section id="books" class="border border-2 my-5 p-5 bg-light">
-				<h2 class="mb-5">Recommended Reading:</h2>
-				<div>
-					<!-- Book results will be displayed here -->
+			<!-- Flight Search Results Section -->
+			<section id="flights" class="my-5 p-5">
+				<h2 class="mb-5">Search Results:</h2>
+				<div id="searchResults">
+					<div class="spinner-border" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+					<p class="fs-4 my-3 text-danger">Loading... the flight API takes a minute to show results.</p>
+					<p class="fs-4 my-3 text-danger">Check console for errors if nothing loads.</p>
+					<!-- Flight results will be displayed here -->
 				</div>
 			</section>
 
+			<!-- Blurb Section -->
+			<section id="about" class="rounded border border-2 m-5 p-5 bg-white">
+				<h2>About <strong>Us</strong></h2>
+				<p class="fs-4 my-3">
+					<strong>CityBookWings</strong> was created for those who love reading and travel. We created this app with all the travel lovers in mind. We hope you enjoy it and find your dream destination and a new favorite book.
+				</p>
+				<p class="fs-4 my-3">Whether you're planning a trip or simply interested in books about a specific location,
+					<strong>CityBookWings</strong> has you covered.
+				</p>
+			</section>
+
+		</div>
+
 		<!-- About Section -->
-		<section id="about" class="border border-2 my-5 p-5 bg-light">
+		<section id="about" class="rounded border border-2 m-5 p-5 bg-white">
 			<h2>What is <strong>CityBookWings</strong>?</h2>
 			<p class="fs-4 my-3">
 				<strong>CityBookWings</strong> provides flight warningrmation for any city you'd like to travel
@@ -129,16 +132,22 @@
 			<p class="fs-4 my-3">Whether you're planning a trip or simply interested in books about a specific location,
 				<strong>CityBookWings</strong> has you covered.
 			</p>
-			</div>
 		</section>
-
 	</main>
 
 	<!-- Footer Section -->
-	<footer class="footer d-flex bg-dark text-white justify-content-between align-items-center px-5 py-3 mt-5 border-top">
+	<footer
+		class="footer d-flex justify-content-between align-items-center px-5 py-3 mt-5 border-top footer-style">
 		<div class="col-md-4 d-flex align-items-center">
-			<p>&copy; 2024 CityBookWings</p>
+			<p class="copyright">&copy; 2024 CityBookWings</p>
 		</div>
+		<ul class="footer-links">
+			<li><a class="nav-item nav-link mx-2" href="#flights">Flights</a></li>
+			<li><a class="nav-item nav-link mx-2" href="#about">About</a></li>
+			<li><a class="nav-item nav-link mx-2" href="#books">Books</li>
+			<li><a class="nav-item nav-link mx-2" href="#calendar">Calendar</li>
+		
+		</ul>
 		<ul class="justify-content-end list-unstyled d-flex">
 			<li>
 				<a class="nav-link m-4" href="https://github.com/AoifeEdX/city-book-wings" target="_blank"><i
@@ -147,6 +156,8 @@
 			</li>
 		</ul>
 	</footer>
+
+	<button id="back-to-top" title="Back to Top" class="btn"><i class="fas fa-arrow-up"></i></button>
 
 	<!-- Bootstrap JS and Custom Script -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
