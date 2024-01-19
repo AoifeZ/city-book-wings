@@ -8,7 +8,7 @@ body {
 }
 
 .hero-section {
-  background-image: url("../assets/images/holiday-motor.jpg");
+  background-image: url("../assets/images/holiday-globe.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,4 +30,36 @@ span {
 
 .nav-link:hover {
   color:#41A3B3;
+}
+
+.form-label {
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+#flights {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: #e27d60;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#back-to-top:hover {
+  background-color: #d46353;
+  transition: color 0.3s ease-in-out;
 }
