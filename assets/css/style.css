@@ -3,7 +3,7 @@ body {
 }
 
 .header-section {
-  background-color: rgb(235, 141, 1);
+  background-color:#e27d60;
   color: white;
 }
 
@@ -14,24 +14,20 @@ body {
   background-repeat: no-repeat;
   color: white;
   padding-top: 5rem;
-  /* Add padding to center the content vertically */
 }
 
 span {
-  color: gold;
+  color: #85DCB8;
   font-weight: bolder;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .nav-link {
-  color: white;
+  color: #85DCB8;
   transition: color 0.3s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .nav-link:hover {
-  color: gold;
-}
-
-#books {
-  display: flex;
-  justify-content: flex-start;
+  color:#41A3B3;
 }
