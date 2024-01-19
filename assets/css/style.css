@@ -1,6 +1,5 @@
 body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .header-section {
@@ -9,10 +8,13 @@ body {
 }
 
 .hero-section {
-  background-image: linear-gradient(180deg,
-      steelblue,
-      lightsteelblue);
-  color: white
+  background-image: url("../assets/images/holiday-motor.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding-top: 5rem;
+  /* Add padding to center the content vertically */
 }
 
 span {
@@ -29,3 +31,7 @@ span {
   color: gold;
 }
 
+#books {
+  display: flex;
+  justify-content: flex-start;
+}
