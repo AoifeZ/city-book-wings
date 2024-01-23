@@ -21,8 +21,9 @@ function getBooks() {
       //flights.forEach(function (flight) {
       // Extract relevant information from the flight data
       //	var NumberofPages = flight.bounds[0].segments[0].flightNumber;
-      var NumberofPages = parsedResponse.docs[0].number_of_pages_median
-	  console.log(NumberofPages)
+	 // for 
+      //var NumberofPages = parsedResponse.docs[i].number_of_pages_median
+	  //console.log(NumberofPages)
       // Create a container div for the heading and cards
       var containerDiv = document.createElement("div");
 
@@ -43,7 +44,11 @@ function getBooks() {
         var author =
           (book.author_name && book.author_name[0]) || "Unknown Author"; // If there is no author named, then it will say "Unknown Author"
         var isbn = (book.isbn && book.isbn[0]) || "No ISBN"; // If the book has no ISBN listed on Open Library, then it will say "No ISBN"
-
+		var numberOfPages =(book.number_of_pages_median) || "Unknown reading time"; 
+		//var numberOfPages =(parsedResponse.number_of_pages_median[0]) || "Unknown reading time"; 
+		//parsedResponse.docs[i].number_of_pages_median
+	    //console.log(numberOfPages)
+       // var NumberofPages = parsedResponse.docs[0].number_of_pages_median
         // Check if the book has cover images
         if (book.cover_i) {
           var coverImageUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`; // Use Open Library's cover image if there is one
@@ -66,6 +71,9 @@ function getBooks() {
           '<p class="card-text flex-grow-1">Author: ' +
           author +
           "</p>" + // Use flex-grow-1 to make the text take up remaining space, s all cards are the same height
+		  '<p class="card-text flex-grow-1">Avg Number of pages: ' +
+          numberOfPages +
+          "</p>" + 
           '<a href="https://openlibrary.org/isbn/' +
           isbn +
           '" target="_blank" class="btn btn-primary mt-auto"> <i class="fa fa-book-open"></i> View Book</a>' +
