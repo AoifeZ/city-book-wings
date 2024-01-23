@@ -14,9 +14,9 @@ body {
 .city-list{
   padding:0%;
   display: wrap;
+  width: 250px
 }
 
-/* #destination{
-padding: auto;
-height: 32px;
-} */
+#destination{
+  height:30px
+}
