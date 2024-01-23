@@ -10,3 +10,13 @@ body {
 .nav-link:hover {
 	color: skyblue;
 }
+
+.city-list{
+  padding:0%;
+  display: wrap;
+}
+
+/* #destination{
+padding: auto;
+height: 32px;
+} */

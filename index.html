@@ -52,19 +52,12 @@
 						<h2>Get <span class="text-info">flight information</span> and <span class="text-info">book recommendations</span> for your
 							ideal&nbsp;holiday.</h2>
 					</div>
-					<!-- <div class="row">
-						<div class="input-group">
-							<input type="text" id="citySearch" class="form-control" placeholder="Where do you want to go?">
-						<button onclick="citySearch()" class="btn btn-info fs-5" type="button"> 	
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-					</div> -->
+<!--These all work now - need to parse second input into API request-->
 					<div class="row">
 						<div class="input-group">
 							
-							<label for="departure">Departing from:</label>
-<input list="departure-cities"  name="departure" id="departure">
+							<label for="departure">Departing:</label>
+<input list="departure-cities" class="city-list" name="departure" id="departure">
 <datalist class="cities "id="departure-cities">
 </datalist>
 
@@ -72,8 +65,8 @@
   <label for="dept-date">On:</label>
   <input type="date" id="dept-date" name="dept-date">
 </form>
-							<label for="destination">Arriving at:</label>
-							<input list="destination-cities"  name="destination" id="destination">
+							<label for="destination">Arriving:</label>
+							<input list="destination-cities" class="city-list" name="destination" id="destination">
 							<datalist class="cities" id="destination-cities">
 							
 							</datalist>
