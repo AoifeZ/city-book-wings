@@ -126,6 +126,9 @@ function updateflightResults(results, exchangeRate) {
         // Convert the price to GBP using the exchange rate
         var priceInGBP = (modifiedPrice * exchangeRate).toFixed(2);
 
+		// Get link to GoToGate.com
+        var sharableURL = flight.shareableUrl;
+
         // Format the data into Bootstrap cards for each flight, with the airline, flight number, departure and arrival airports, departure and arrival times, and a button to view the flight on Booking.com
         // TODO: Currently shows the city names instead of the airport names; need to find airport values (or change search inputs to airports rather than cities?)
         // TODO: Update button to link to the flight on Booking.com
