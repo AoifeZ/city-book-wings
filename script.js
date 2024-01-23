@@ -1,22 +1,22 @@
 function getbooks() {
-  //const queryURL = `http://openlibrary.org/search.json?q=london`
+    //const queryURL = `http://openlibrary.org/search.json?q=london`
 
-  const queryURL = `http://openlibrary.org/subjects/london.json?q=london`;
-  // /subjects/love.json
+    const queryURL = `http://openlibrary.org/subjects/london.json?q=london`;
+    // /subjects/love.json
 
-  fetch(queryURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-    });
+    fetch(queryURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
 }
 getbooks();
 
 function bookSubject() {
-  var flightdestination = document.getElementById("citysearch").value;
-  alert(flightdestination);
+    var flightdestination = document.getElementById("citysearch").value;
+    alert(flightdestination);
 }
 //bookSubject()
 
@@ -26,19 +26,26 @@ function bookSubject() {
 // onclick="getbooks()"
 
 //create var for cities
-var cities = ["London","Berlin","Dublin", "Madrid","New York","Singapore","Mumbai"];
+//make sure each one matches the city name verbatim as configured in the API.
+var cities = [
+    "London, United Kingdom",
+    "Berlin, Germany",
+    "Dublin, Ireland",
+    "Madrid, Spain",
+    "New York City",
+    "Singapore",
+    "Mumbai, India",
+];
 //target cities el in html
-var destCityName = document.querySelectorAll('.cities');
+var destCityName = document.querySelectorAll(".cities");
 console.log(destCityName);
-destCityName.forEach(list => {
-
-  for(var i=0;i<cities.length;i++){
-    var opt = document.createElement('option');
-    opt.innerHTML = cities[i];
-    opt.value = cities[i];
-    list.appendChild(opt)
-  }
-  
+destCityName.forEach((list) => {
+    for (var i = 0; i < cities.length; i++) {
+        var opt = document.createElement("option");
+        opt.innerHTML = cities[i];
+        opt.value = cities[i];
+        list.appendChild(opt);
+    }
 });
 //loop through cities array
 bookSubject();
@@ -58,5 +65,7 @@ bookSubject();
 //   pagecount:pageCountEl;
 //   readingtime:readingTimeEl;
 // }
-
-
+// localStorage.setItem("savedBookData",savedBookData);
+// console.log(localStorage;)
+// //save name
+// localStorage.getItem("savedBookData").name;
