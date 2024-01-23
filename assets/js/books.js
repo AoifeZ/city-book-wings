@@ -12,7 +12,7 @@ function getBooks() {
 					return response.json(); // Convert JSON in the response body to a JavaScript object
 			})
 			.then(function (parsedResponse) { // Use the parsed response to get the book info we want to show on the webpage 
-
+                console.log(parsedResponse)
 					// Create a container div for the heading and cards
 					var containerDiv = document.createElement("div");
 
