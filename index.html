@@ -72,7 +72,10 @@
   <option value="Dublin">
   <option value="Berlin">
 </datalist>
-
+<form>
+  <label for="dept-date">On:</label>
+  <input type="date" id="dept-date" name="dept-date">
+</form>
 							<label for="destination">Arriving at:</label>
 							<input list="destination-cities" name="destination" id="destination">
 							<datalist id="destination-cities">
@@ -82,6 +85,10 @@
 									<option value="Dublin">
 									<option value="Berlin">
 							</datalist>
+							<form>
+								<label for="return-date">On:</label>
+								<input type="date" id="return-date" name="return-date">
+							</form>
 							<button onclick="bookSubject()" class="btn btn-info fs-5" type="button"> 	
 								<i class="fas fa-search"></i>
 							</button>
