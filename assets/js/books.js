@@ -32,7 +32,7 @@ function getBooks() {
         '<h3 class="my-5 py-5 text-center">... and explore related books to read on your trip.</h3>';
 
       // Use slice to get the first 8 books from parsedResponse
-      var books = parsedResponse.docs.slice(0, 8);
+      var books = parsedResponse.docs.slice(0, 4);
 
       // Build and display the cards in one row
       var rowDiv = document.createElement("div");
