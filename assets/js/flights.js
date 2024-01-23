@@ -152,7 +152,7 @@ function updateflightResults(results, exchangeRate) {
           "<br>Price: £" +
           priceInGBP +
           "</p>" +
-          '<a href="#" class="btn btn-primary mt-auto"><i class="fa fa-plane"></i> Book Flight</a>' +
+          '<a href= ' + sharableURL + ' class="btn btn-primary mt-auto"><i class="fa fa-plane"></i> Book Flight</a>' +
           "</div>" +
           "</div>" +
           "</div>";
