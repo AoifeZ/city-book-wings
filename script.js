@@ -25,4 +25,9 @@ function bookSubject() {
 //when button is clicked
 // onclick="getbooks()"
 
-const cities = ["London","Dublin","Madrid","Paris","Budapest","NYC","Tokyo","Singapore"]
+const destCityName = document.getElementById("#dest-option");
+const cities = ["London","Berlin","Dublin"];
+
+array.forEach(element => {
+  destCityName.append(cities);
+});
