@@ -42,6 +42,7 @@ destCityName.forEach(list => {
 });
 //loop through cities array
 
+bookSubject();
 
 
 
