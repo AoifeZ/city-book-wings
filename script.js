@@ -41,8 +41,22 @@ destCityName.forEach(list => {
   
 });
 //loop through cities array
-
 bookSubject();
 
+// create variable for city to search openlibraryAPI for search
+// const cityForBooks = document.innerHTML.getElementById('destination');
+// console.log("Books will be returned on the topic of:"cityForBooks);
+
+//for localStorage:
+//destination cities + relevant books
+//(limited to strings)
+
+// let savedBookData = {
+//   name:titleEl;
+//   author:authorEl;
+//   publicationyear:yearEl;
+//   pagecount:pageCountEl;
+//   readingtime:readingTimeEl;
+// }
 
 
