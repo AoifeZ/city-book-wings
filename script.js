@@ -25,9 +25,23 @@ function bookSubject() {
 //when button is clicked
 // onclick="getbooks()"
 
-const destCityName = document.getElementById("#dest-option");
-const cities = ["London","Berlin","Dublin"];
+//create var for cities
+var cities = ["London","Berlin","Dublin", "Madrid","New York","Singapore","Mumbai"];
+//target cities el in html
+var destCityName = document.querySelectorAll('.cities');
+console.log(destCityName);
+destCityName.forEach(list => {
 
-array.forEach(element => {
-  destCityName.append(cities);
+  for(var i=0;i<cities.length;i++){
+    var opt = document.createElement('option');
+    opt.innerHTML = cities[i];
+    opt.value = cities[i];
+    list.appendChild(opt)
+  }
+  
 });
+//loop through cities array
+
+
+
+
