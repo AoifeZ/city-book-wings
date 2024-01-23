@@ -24,3 +24,5 @@ function bookSubject() {
 //a form input that allows the user to input a subject(city)
 //when button is clicked
 // onclick="getbooks()"
+
+const cities = ["London","Dublin","Madrid","Paris","Budapest","NYC","Tokyo","Singapore"]
