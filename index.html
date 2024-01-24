@@ -20,8 +20,8 @@
 		<!-- Nav -->
 		<nav class="navbar navbar-expand-lg navbar-dark py-5" id="navbar">
 			<div class="container">
-				<img src="./Citybookwingslogo-cropped.png" width="120" height="120" alt="CityBookWings logo">
-				
+				<img src="./assets/images/Citybookwingslogo-cropped.png" width="120" height="120" alt="CityBookWings logo" class="me-2">
+
 				<a class="navbar-brand fs-3" href="/">CITY<span class="fw-normal text-warning">BOOK</span>WINGS</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
 					aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,14 +58,25 @@
 									<div class="col-md">
 										<div class="form-group">
 											<label for="locationFrom" class="mb-3 fs-5">From</label>
-											<input type="text" class="form-control mb-5" id="locationFrom" placeholder="City, Country"
-												required>
+											<select class="form-control mb-5" id="locationFrom" required>
+												<option value="London, United Kingdom">London, United Kingdom</option>
+												<option value="Dublin, Ireland">Dublin, Ireland</option>
+												<option value="Paris, France">Paris, France</option>
+												<option value="Madrid, Spain">Madrid, Spain</option>
+												<option value="Stockholm, Sweden">Stockholm, Sweden</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-md">
 										<div class="form-group">
 											<label for="locationTo" class="mb-3 fs-5">To</label>
-											<input type="text" class="form-control mb-5" id="locationTo" placeholder="City, Country" required>
+											<select class="form-control mb-5" id="locationTo" required>
+												<option value="London, United Kingdom">London, United Kingdom</option>
+												<option value="Dublin, Ireland">Dublin, Ireland</option>
+												<option value="Paris, France">Paris, France</option>
+												<option value="Madrid, Spain">Madrid, Spain</option>
+												<option value="Stockholm, Sweden">Stockholm, Sweden</option>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -84,7 +95,8 @@
 										<div class="form-group d-flex flex-column">
 											<label for="search-button" class="mb-3 text-light fs-5 d-block"> ` </label>
 											<a href="#loading" class="btn btn-warning btn-block  mb-3" type="submit"
-												onclick="loadingIcon(); getFlights(); getBooks();"><i class="fas fa-search"></i> Search</a>
+												onclick="loadingIcon(); getFlights(); getBooks(); logPreviousSearch();"><i
+													class="fas fa-search"></i> Search</a>
 										</div>
 									</div>
 								</div>
@@ -194,29 +206,29 @@
 							<a href="#" class="btn btn-warning mt-auto">Book Now</a>
 						</div>
 					</div>
-<!--These all work now - need to parse second input into API request-->
+					<!--These all work now - need to parse second input into API request-->
 					<div class="row">
 						<div class="input-group">
-							
+
 							<label for="departure"></label>
-<input list="location-from" class="city-list" name="locationFrom" id="locationFrom" placeholder="From:">
-<datalist class="cities "id="departure-cities">
-</datalist>
-<form>
-  <label for="dept-date"></label>
-  <input type="date" id="dept-date" name="dept-date">
-</form>
+							<input list="location-from" class="city-list" name="locationFrom" id="locationFrom" placeholder="From:">
+							<datalist class="cities " id="departure-cities">
+							</datalist>
+							<form>
+								<label for="dept-date"></label>
+								<input type="date" id="dept-date" name="dept-date">
+							</form>
 							<label for="destination"></label>
 							<input list="location-to" class="city-list" name="locationTo" id="locationTo" placeholder="To:">
 							<datalist class="cities" id="destination-cities">
-							<!--Data list will be populated by cities in js array using a for loop-->
+								<!--Data list will be populated by cities in js array using a for loop-->
 							</datalist>
-						
+
 							<form>
 								<label for="return-date"></label>
 								<input type="date" id="return-date" name="return-date">
 							</form>
-							<button onclick="bookSubject()" class="btn btn-info fs-5" type="button"> 	
+							<button onclick="bookSubject()" class="btn btn-info fs-5" type="button">
 								<i class="fas fa-search"></i>
 							</button>
 						</div>
@@ -297,7 +309,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center my-5">
 					<p>&copy; 2024 CityBookWings
-						<img src="./Citybookwingslogo.png" width="35" height="35" alt="CityBookWings logo"><br>
+						<img src="./assets/images/Citybookwingslogo.png" width="35" height="35" alt="CityBookWings logo"><br>
 						<a class="nav-link m-4" href="https://github.com/AoifeEdX/city-book-wings" target="_blank"><i
 								class="fab fa-github"></i>
 							GitHub Repo</a>
@@ -314,7 +326,7 @@
 	<script src="./assets/js/loading.js"></script>
 	<script src="./assets/js/flights.js"></script>
 	<script src="./assets/js/books.js"></script>
-
+	<script src="./assets/js/localStorage.js"></script>
 
 </body>
 
