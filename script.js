@@ -29,6 +29,7 @@ function bookSubject() {
 //make sure each one matches the city name verbatim as configured in the API.
 var cities = [
     "London, United Kingdom",
+    "Luanda, Angola",
     "Berlin, Germany",
     "Dublin, Ireland",
     "Madrid, Spain",
