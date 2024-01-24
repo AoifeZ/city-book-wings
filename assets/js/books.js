@@ -45,6 +45,7 @@ function getBooks() {
           (book.author_name && book.author_name[0]) || "Unknown Author"; // If there is no author named, then it will say "Unknown Author"
         var isbn = (book.isbn && book.isbn[0]) || "No ISBN"; // If the book has no ISBN listed on Open Library, then it will say "No ISBN"
 		var numberOfPages =(book.number_of_pages_median) || "Unknown reading time"; 
+    var readingTime = Math.ceil((numberOfPages*1.5)/60)
 		//var numberOfPages =(parsedResponse.number_of_pages_median[0]) || "Unknown reading time"; 
 		//parsedResponse.docs[i].number_of_pages_median
 	    //console.log(numberOfPages)
@@ -71,8 +72,10 @@ function getBooks() {
           '<p class="card-text flex-grow-1">Author: ' +
           author +
           "</p>" + // Use flex-grow-1 to make the text take up remaining space, s all cards are the same height
-		  '<p class="card-text flex-grow-1">Avg Number of pages: ' +
+		  '<p class="card-text flex-grow-1">Number of pages: ' +
           numberOfPages +
+          '<p class="card-text flex-grow-1">Average Reading Time: ' +
+          readingTime + " hours" +
           "</p>" + 
           '<a href="https://openlibrary.org/isbn/' +
           isbn +
