@@ -1,0 +1,22 @@
+body {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+}
+
+.nav-link {
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: skyblue;
+}
+
+.city-list {
+    padding: 0%;
+    display: wrap;
+    width: 250px;
+}
+
+#destination {
+    height: 30px;
+}
