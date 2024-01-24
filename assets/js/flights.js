@@ -16,6 +16,19 @@ function getFlights() {
   console.log("Date:", departureDate);
   console.log("-- Getting results (please wait...): --");
 
+		// Save user inputs to localStorage
+		var userSearch = {
+			locationFrom: locationFrom,
+			locationTo: locationTo,
+			departureDate: departureDate
+		};
+	
+		// Convert the userSearch object to a JSON string
+		var userSearchJSON = JSON.stringify(userSearch);
+	
+		// Save the JSON string to localStorage with a key
+		localStorage.setItem('userSearch', userSearchJSON);
+
   // Fetch exchange rate data
   //? API documentation: https://www.exchangerate-api.com/docs/pair-conversion-requests
   var exchangeRateAPIKey = "a4e7dfed1a6162f81c023788";
@@ -130,8 +143,6 @@ function updateflightResults(results, exchangeRate) {
         var sharableURL = flight.shareableUrl;
 
         // Format the data into Bootstrap cards for each flight, with the airline, flight number, departure and arrival airports, departure and arrival times, and a button to view the flight on Booking.com
-        // TODO: Currently shows the city names instead of the airport names; need to find airport values (or change search inputs to airports rather than cities?)
-        // TODO: Update button to link to the flight on Booking.com
         var cardHtml =
           '<div class="col-md-3 mb-3">' +
           '<div class="card h-100">' +
@@ -174,4 +185,20 @@ function updateflightResults(results, exchangeRate) {
     flightResults.innerHTML =
       '<p class="fs-4 my-3 text-danger text-center">Error loading data. Check console for details.</p>'; // Display an error message if the API response is unexpected
   }
+}
+
+// Retrieve and pre-fill the form with stored user inputs on page load
+window.onload = function() {
+	// Retrieve the userSearch JSON string from localStorage
+	var userSearchJSON = localStorage.getItem('userSearch');
+
+	// Parse the JSON string to get the userSearch object
+	var userSearch = JSON.parse(userSearchJSON);
+
+	// Check if there's stored data and pre-fill the form
+	if (userSearch) {
+			document.getElementById('locationFrom').value = userSearch.locationFrom;
+			document.getElementById('locationTo').value = userSearch.locationTo;
+			document.getElementById('departureDate').value = userSearch.departureDate;
+	}
 }
