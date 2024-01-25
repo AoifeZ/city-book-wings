@@ -4,6 +4,7 @@
 
 * [Deployed website](https://aoifeedx.github.io/city-book-wings/)
 * [GitHub repository](https://github.com/AoifeEdX/city-book-wings)
+* [Presentation Link](https://docs.google.com/presentation/d/13TycbhAf52Db8Xe-SCIUqh91sMM85cP7j7yFX1e11fI/edit#slide=id.g29f43f0a72_0_24)
 
 ## Screenshot
 
