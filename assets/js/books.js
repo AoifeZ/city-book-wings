@@ -1,104 +1,135 @@
+// Add city options array
+var cities = [
+	"London, United Kingdom",
+	"Luanda, Angola",
+	"Dublin, Ireland",
+	"Paris, France",	
+	"Madrid, Spain",
+	"Stockholm, Sweden",
+	"Beijing, China",
+	"Mumbai, India"
+];
+
+// Function to populate dropdown
+function populateDropdown(selectId) {
+	var selectElement = document.getElementById(selectId);
+
+	cities.forEach(function (city) {
+			var option = document.createElement("option");
+			option.value = city;
+			option.text = city;
+			selectElement.add(option);
+	});
+}
+
+// Populate the "From" dropdown
+populateDropdown("locationFrom");
+
+// Populate the "To" dropdown
+populateDropdown("locationTo");
+
 // Search books when "Search" button is clicked...
 function getBooks() {
-  // Clear previous search results
-  var bookResults = document.getElementById("bookResults");
-  bookResults.innerHTML = "";
+	// Clear previous search results
+	var bookResults = document.getElementById("bookResults");
+	bookResults.innerHTML = "";
 
-  // Fetch data from Open Library URL
-  // TODO: Change URL to return more interesting / relevant books?
-  fetch(
-    "https://openlibrary.org/search.json?q=" +
-      document.getElementById("locationTo").value
-  ) // "q=" means query, and "locationTo" is the user input that is being queried on Open Library
-    .then(function (response) {
-      // 'response' is the HTTP response object
-      return response.json(); // Convert JSON in the response body to a JavaScript object
-    })
-    .then(function (parsedResponse) {
-      // Use the parsed response to get the book info we want to show on the webpage
-      console.log(parsedResponse);
-	  
-      //flights.forEach(function (flight) {
-      // Extract relevant information from the flight data
-      //	var NumberofPages = flight.bounds[0].segments[0].flightNumber;
-	 // for 
-      //var NumberofPages = parsedResponse.docs[i].number_of_pages_median
-	  //console.log(NumberofPages)
-      // Create a container div for the heading and cards
-      var containerDiv = document.createElement("div");
+	// Fetch data from Open Library URL
+	// TODO: Change URL to return more interesting / relevant books?
+	fetch(
+		"https://openlibrary.org/search.json?q=" +
+		document.getElementById("locationTo").value
+	) // "q=" means query, and "locationTo" is the user input that is being queried on Open Library
+		.then(function (response) {
+			// 'response' is the HTTP response object
+			return response.json(); // Convert JSON in the response body to a JavaScript object
+		})
+		.then(function (parsedResponse) {
+			// Use the parsed response to get the book info we want to show on the webpage
+			console.log(parsedResponse);
 
-      // Add the heading to the container
-      containerDiv.innerHTML =
-        '<h3 class="my-5 py-5 text-center">... and explore related books to read on your trip.</h3>';
+			//flights.forEach(function (flight) {
+			// Extract relevant information from the flight data
+			//	var NumberofPages = flight.bounds[0].segments[0].flightNumber;
+			// for 
+			//var NumberofPages = parsedResponse.docs[i].number_of_pages_median
+			//console.log(NumberofPages)
+			// Create a container div for the heading and cards
+			var containerDiv = document.createElement("div");
 
-      // Use slice to get the first 8 books from parsedResponse
-      var books = parsedResponse.docs.slice(0, 4);
+			// Add the heading to the container
+			containerDiv.innerHTML =
+				'<h3 class="my-5 py-5 text-center">... and explore related books to read on your trip.</h3>';
 
-      // Build and display the cards in one row
-      var rowDiv = document.createElement("div");
-      rowDiv.className = "row";
+			// Use slice to get the first 8 books from parsedResponse
+			var books = parsedResponse.docs.slice(0, 4);
 
-      // Loop through each book's data
-      books.forEach(function (book, index) {
-        var title = book.title || "Unknown Title"; // If the book has no title on Open Library (not sure if that is possible), but the other info for the book matches the search, then it will say "Unknown Title"
-        var author =
-          (book.author_name && book.author_name[0]) || "Unknown Author"; // If there is no author named, then it will say "Unknown Author"
-        var isbn = (book.isbn && book.isbn[0]) || "No ISBN"; // If the book has no ISBN listed on Open Library, then it will say "No ISBN"
-		var numberOfPages =(book.number_of_pages_median) || "Unknown reading time"; 
-    var readingTime = Math.ceil((numberOfPages*1.5)/60)
-		//var numberOfPages =(parsedResponse.number_of_pages_median[0]) || "Unknown reading time"; 
-		//parsedResponse.docs[i].number_of_pages_median
-	    //console.log(numberOfPages)
-       // var NumberofPages = parsedResponse.docs[0].number_of_pages_median
-        // Check if the book has cover images
-        if (book.cover_i) {
-          var coverImageUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`; // Use Open Library's cover image if there is one
-        } else {
-          var placeholderImageUrl = `https://picsum.photos/200/300?seed=${index}`; // Use Picsum placeholder image if the book doesn't have a cover image on Open Librar
-          var coverImageUrl = placeholderImageUrl;
-        }
+			// Build and display the cards in one row
+			var rowDiv = document.createElement("div");
+			rowDiv.className = "row";
 
-        // Format the data into Bootstrap cards for each book, with the book cover, title, author, and a button to view the book on Open Library
-        var cardHtml =
-          '<div class="col-md-3 mb-3">' +
-          '<div class="card h-100">' +
-          '<img src="' +
-          coverImageUrl +
-          '" class="card-img-top book-cover" alt="Book Cover" style="height: 400px; object-fit: cover;">' +
-          '<div class="card-body d-flex flex-column">' + // Use flex-column to make the body a flex container with a vertical direction
-          '<h5 class="card-title">' +
-          title +
-          "</h5>" +
-          '<p class="card-text flex-grow-1">Author: ' +
-          author +
-          "</p>" + // Use flex-grow-1 to make the text take up remaining space, s all cards are the same height
-		  '<p class="card-text flex-grow-1">Number of pages: ' +
-          numberOfPages +
-          '<p class="card-text flex-grow-1">Average Reading Time: ' +
-          readingTime + " hours" +
-          "</p>" + 
-          '<a href="https://openlibrary.org/isbn/' +
-          isbn +
-          '" target="_blank" class="btn btn-primary mt-auto"> <i class="fa fa-book-open"></i> View Book</a>' +
-          "</div>" +
-          "</div>" +
-          "</div>";
+			// Loop through each book's data
+			books.forEach(function (book, index) {
+				var title = book.title || "Unknown Title"; // If the book has no title on Open Library (not sure if that is possible), but the other info for the book matches the search, then it will say "Unknown Title"
+				var author =
+					(book.author_name && book.author_name[0]) || "Unknown Author"; // If there is no author named, then it will say "Unknown Author"
+				var isbn = (book.isbn && book.isbn[0]) || "No ISBN"; // If the book has no ISBN listed on Open Library, then it will say "No ISBN"
+				var numberOfPages = (book.number_of_pages_median) || "Page number unknown";
+				var readingTime = Math.ceil((numberOfPages * 1.5) / 60)
+				//var numberOfPages =(parsedResponse.number_of_pages_median[0]) || "Unknown reading time"; 
+				//parsedResponse.docs[i].number_of_pages_median
+				//console.log(numberOfPages)
+				// var NumberofPages = parsedResponse.docs[0].number_of_pages_median
+				// Check if the book has cover images
+				if (book.cover_i) {
+					var coverImageUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`; // Use Open Library's cover image if there is one
+				} else {
+					var placeholderImageUrl = `https://picsum.photos/200/300?seed=${index}`; // Use Picsum placeholder image if the book doesn't have a cover image on Open Librar
+					var coverImageUrl = placeholderImageUrl;
+				}
 
-        // Append the book card to the row
-        rowDiv.innerHTML += cardHtml;
-      });
+				// Format the data into Bootstrap cards for each book, with the book cover, title, author, and a button to view the book on Open Library
+				var cardHtml =
+					'<div class="col-md-3 mb-3">' +
+					'<div class="card h-100">' +
+					'<img src="' +
+					coverImageUrl +
+					'" class="card-img-top book-cover" alt="Book Cover" style="height: 400px; object-fit: cover;">' +
+					'<div class="card-body d-flex flex-column">' + // Use flex-column to make the body a flex container with a vertical direction
+					'<h5 class="card-title">' +
+					title +
+					"</h5>" +
+					'<p class="card-text flex-grow-1"><strong>Author:</strong> ' +
+					author +
+					"<br>" + 
+					'<strong>Number of pages:</strong> ' +
+					numberOfPages +
+					"<br>" + 
+					'<strong>Average Reading Time:</strong> ' +
+					readingTime + " hours" +
+					"</p>" +
+					'<a href="https://openlibrary.org/isbn/' +
+					isbn +
+					'" target="_blank" class="btn btn-warning mt-auto"> <i class="fa fa-book-open"></i> View Book</a>' +
+					"</div>" +
+					"</div>" +
+					"</div>";
 
-      // Append the rowDiv to the container
-      containerDiv.appendChild(rowDiv);
+				// Append the book card to the row
+				rowDiv.innerHTML += cardHtml;
+			});
 
-      // Append the JS containerDiv to the HTML bookResults section
-      bookResults.appendChild(containerDiv);
-    })
+			// Append the rowDiv to the container
+			containerDiv.appendChild(rowDiv);
 
-    // If there is an error, console log it and show an error message on the webpage
-    .catch(function (error) {
-      console.error("Error fetching data:", error);
-      bookResults.innerHTML =
-        '<p class="fs-4 my-3 text-danger text-center">Error loading data. Check console for details.</p>';
-    });
+			// Append the JS containerDiv to the HTML bookResults section
+			bookResults.appendChild(containerDiv);
+		})
+
+		// If there is an error, console log it and show an error message on the webpage
+		.catch(function (error) {
+			console.error("Error fetching data:", error);
+			bookResults.innerHTML =
+				'<p class="fs-4 my-3 text-danger text-center">Error loading data. Check console for details.</p>';
+		});
 }

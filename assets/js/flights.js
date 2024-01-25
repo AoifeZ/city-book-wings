@@ -16,19 +16,6 @@ function getFlights() {
   console.log("Date:", departureDate);
   console.log("-- Getting results (please wait...): --");
 
-		// Save user inputs to localStorage
-		var userSearch = {
-			locationFrom: locationFrom,
-			locationTo: locationTo,
-			departureDate: departureDate
-		};
-	
-		// Convert the userSearch object to a JSON string
-		var userSearchJSON = JSON.stringify(userSearch);
-	
-		// Save the JSON string to localStorage with a key
-		localStorage.setItem('userSearch', userSearchJSON);
-
   // Fetch exchange rate data
   //? API documentation: https://www.exchangerate-api.com/docs/pair-conversion-requests
   var exchangeRateAPIKey = "a4e7dfed1a6162f81c023788";
@@ -152,18 +139,18 @@ function updateflightResults(results, exchangeRate) {
           " - " +
           flightName +
           "</h5>" +
-          '<p class="card-text">From: ' +
+          '<p class="card-text"><strong>From:</strong> ' +
           airportFrom +
-          "<br>To: " +
+          "<br><strong>To:</strong> " +
           airportTo +
-          "<br>Departure Time: " +
+          "<br><strong>Departure Time:</strong> " +
           departureTime +
-          "<br>Arrival Time: " +
+          "<br><strong>Arrival Time:</strong> " +
           arrivalTime +
-          "<br>Price: £" +
+          "<br><strong>Price:</strong> £" +
           priceInGBP +
           "</p>" +
-          '<a href= ' + sharableURL + ' class="btn btn-primary mt-auto"><i class="fa fa-plane"></i> Book Flight</a>' +
+          '<a href= ' + sharableURL + ' class="btn btn-warning mt-auto"><i class="fa fa-plane"></i> Book Flight</a>' +
           "</div>" +
           "</div>" +
           "</div>";
@@ -185,20 +172,4 @@ function updateflightResults(results, exchangeRate) {
     flightResults.innerHTML =
       '<p class="fs-4 my-3 text-danger text-center">Error loading data. Check console for details.</p>'; // Display an error message if the API response is unexpected
   }
-}
-
-// Retrieve and pre-fill the form with stored user inputs on page load
-window.onload = function() {
-	// Retrieve the userSearch JSON string from localStorage
-	var userSearchJSON = localStorage.getItem('userSearch');
-
-	// Parse the JSON string to get the userSearch object
-	var userSearch = JSON.parse(userSearchJSON);
-
-	// Check if there's stored data and pre-fill the form
-	if (userSearch) {
-			document.getElementById('locationFrom').value = userSearch.locationFrom;
-			document.getElementById('locationTo').value = userSearch.locationTo;
-			document.getElementById('departureDate').value = userSearch.departureDate;
-	}
 }
