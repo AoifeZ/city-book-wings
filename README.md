@@ -5,6 +5,10 @@
 * [Deployed website](https://aoifeedx.github.io/city-book-wings/)
 * [GitHub repository](https://github.com/AoifeEdX/city-book-wings)
 
+## Screenshot
+
+![screenshot](./assets/images/screenshot.jpg)
+
 ## Description
 
 CityBookWings provides flight information for any city you'd like to travel to, and recommends books about that city that you might like to read.
@@ -39,7 +43,6 @@ The following sites were used for reference:
 * [Rapid API Hub Documentation](https://docs.rapidapi.com/)
 * YouTube: [Use The Open Library API to Search Books](https://www.youtube.com/watch?v=LNKuZBYpl4o)
 * YouTube: [Using the Internet Archive's Open Library APIs (Live Demos)](https://www.youtube.com/watch?v=reN_okp2Gq4)
-
 
 ## License
 
