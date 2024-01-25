@@ -1,33 +1,3 @@
-// Add city options array
-var cities = [
-	"London, United Kingdom",
-	"Luanda, Angola",
-	"Dublin, Ireland",
-	"Paris, France",	
-	"Madrid, Spain",
-	"Stockholm, Sweden",
-	"Beijing, China",
-	"Mumbai, India"
-];
-
-// Function to populate dropdown
-function populateDropdown(selectId) {
-	var selectElement = document.getElementById(selectId);
-
-	cities.forEach(function (city) {
-			var option = document.createElement("option");
-			option.value = city;
-			option.text = city;
-			selectElement.add(option);
-	});
-}
-
-// Populate the "From" dropdown
-populateDropdown("locationFrom");
-
-// Populate the "To" dropdown
-populateDropdown("locationTo");
-
 // Search books when "Search" button is clicked...
 function getBooks() {
 	// Clear previous search results
@@ -35,11 +5,11 @@ function getBooks() {
 	bookResults.innerHTML = "";
 
 	// Fetch data from Open Library URL
-	// TODO: Change URL to return more interesting / relevant books?
 	fetch(
 		"https://openlibrary.org/search.json?q=" +
-		document.getElementById("locationTo").value
-	) // "q=" means query, and "locationTo" is the user input that is being queried on Open Library
+		document.getElementById("locationTo").value +
+    "&subject=fiction"
+	) // "q=" means query, and "locationTo" is the user input that is being queried on Open Library, &subject=fiction just searches for fiction books
 		.then(function (response) {
 			// 'response' is the HTTP response object
 			return response.json(); // Convert JSON in the response body to a JavaScript object
@@ -61,7 +31,7 @@ function getBooks() {
 			containerDiv.innerHTML =
 				'<h3 class="my-5 py-5 text-center">... and explore related books to read on your trip.</h3>';
 
-			// Use slice to get the first 8 books from parsedResponse
+			// Use slice to get the first 4 books from parsedResponse
 			var books = parsedResponse.docs.slice(0, 4);
 
 			// Build and display the cards in one row
@@ -110,7 +80,7 @@ function getBooks() {
 					"</p>" +
 					'<a href="https://openlibrary.org/isbn/' +
 					isbn +
-					'" target="_blank" class="btn btn-warning mt-auto"> <i class="fa fa-book-open"></i> View Book</a>' +
+					'" target="_blank" class="btn button_slide slide_down mt-auto"> <i class="fa fa-book-open"></i> View Book</a>' +
 					"</div>" +
 					"</div>" +
 					"</div>";
