@@ -24,17 +24,17 @@
 			<div class="container" id="stickynav">
 				<img src="./assets/images/Citybookwingslogo-cropped.png" width="60" height="60" alt="CityBookWings logo"
 					class="me-2">
-				<a class="navbar-brand fs-3" href="/">CITY<span class="fw-normal text-warning">BOOK</span>WINGS</a>
+				<a class="navbar-brand fs-3" href="index.html">CITY<span class="fw-normal text-warning">BOOK</span>WINGS</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
 					aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbar-menu">
-					<ul class="navbar-nav ms-auto fs-5">
+					<ul class="navbar-nav ms-auto fs-5 text-end">
 						<li class="nav-item ms-4"><a class="nav-link no-style" href="#testimonials">Testimonials</a>
-						<li class="nav-item ms-4"><a class="nav-link no-style" href="#cities">Cities</a></li>
-						<li class="nav-item ms-4"><a class="nav-link no-style" href="#books">Books</a></li>
 						<li class="nav-item ms-4"><a class="nav-link no-style" href="#about">About</a></li>
+						<li class="nav-item ms-4"><a class="nav-link no-style" href="saved_flights.html">Saved Flights</a></li>
+						<li class="nav-item ms-4"><a class="nav-link no-style" href="saved_books.html">Saved Books</a></li>
 						</li>
 					</ul>
 				</div>
@@ -90,8 +90,7 @@
 										<div class="form-group d-flex flex-column">
 											<label for="search-button" class="text-light d-block"> ` </label>
 											<a href="#loading" class="btn button_slide slide_down btn-block  mb-3" type="submit"
-												onclick="loadingIcon(); getFlights(); getBooks(); logPreviousSearch();"><i
-													class="fas fa-search"></i>
+												onclick="loadingIcon(); getFlights(); getBooks();"><i class="fas fa-search"></i>
 												Search</a>
 										</div>
 									</div>
@@ -122,9 +121,7 @@
 			<!-- Flight Search Results Section -->
 			<section>
 				<div id="flightResults" class="pb-5">
-
 					<!-- Flight results will be displayed here -->
-
 				</div>
 			</section>
 			<!-- End of Flight Search Results Section-->
@@ -132,9 +129,7 @@
 			<!-- Book Search Results Section -->
 			<section>
 				<div id="bookResults" class="pb-5">
-
 					<!-- Book results will be displayed here -->
-
 				</div>
 			</section>
 			<!-- End of Book Search Results Section -->
@@ -146,62 +141,65 @@
 	<!-- Testimonial Section -->
 	<section id="testimonials" class="bg-white border">
 		<div class="container p-5">
-			<h1 class="mb-5 text-center">Testimonials:</h1>
+			<h1 class="text-center">Testimonials:</h1>
 			<div class="row align-items-center">
-				<div class="col-lg-6 info-left p-3 text-center"> <!-- Added 'text-center' class here -->
+				<div class="col-md-4 info-left p-3 text-center">
 					<!-- Image Slideshow -->
 					<div class="slideshow-container">
 
 						<!-- First Testimonial -->
 						<div class="mySlides active">
-							<img class="img-fluid testimonial-img" src="./assets/images/testimonial.jpg" alt="Testimonial">
+							<img class="img-fluid testimonial-img rounded-pill" src="./assets/images/testimonial.jpg"
+								alt="Testimonial">
 						</div>
 
 						<!-- Second Testimonial -->
 						<div class="mySlides active">
-							<img class="img-fluid testimonial-img" src="./assets/images/testimonial2.jpg" alt="Testimonial2">
+							<img class="img-fluid testimonial-img rounded-pill" src="./assets/images/testimonial2.jpg"
+								alt="Testimonial2">
 						</div>
 
 						<!-- Third Testimonial -->
 						<div class="mySlides active">
-							<img class="img-fluid testimonial-img" src="./assets/images/testimonial3.jpg" alt="Testimonial3">
+							<img class="img-fluid testimonial-img rounded-pill" src="./assets/images/testimonial3.jpg"
+								alt="Testimonial3">
 						</div>
 					</div>
 				</div>
 				<!-- End of image slideshow -->
 
 				<!-- Testimonial Text Slideshow -->
-				<div class="col-lg-6 info-right p-5">
+				<div class="col-md-8 info-right p-5">
 					<!-- Sharon Gibson testimonial -->
 					<div class="slideshow-text-container">
 						<div class="mySlidesText active">
-							<h2 class="my-5">Sharon Gibson</h2>
-							<h5 class="my-4">
-								CityBookWings is my go-to website for holidays and reading. I cannot recommend them enough.
-							</h5>
+							<h2 class="m-5">Sharon Gibson</h2>
+							<h4 class="m-5">
+								"CityBookWings is my go-to website for holidays and reading. I cannot recommend them enough."
+							</h4>
 						</div>
 					</div>
 
 					<!-- Betty Collins testimonial -->
 					<div class="slideshow-text-container">
 						<div class="mySlidesText active">
-							<h2 class="my-5">Betty Collins</h2>
-							<h5 class="my-4">
-								I absolutely love CityBookWings, whether I travel or not I love using it to find amazing destinations
-								for great prices or just to find a great book.
-							</h5>
+							<h2 class="m-5">Betty Collins</h2>
+							<h4 class="m-5">
+								"I absolutely love CityBookWings, whether I travel or not I love using it to find amazing destinations
+								for great prices or just to find a great book."
+							</h4>
 						</div>
 					</div>
 
 					<!-- Katy Smith testimonial -->
 					<div class="slideshow-text-container">
 						<div class="mySlidesText active">
-							<h2 class="my-5">Katy Smith</h2>
-							<h5 class="my-4">
-								I travel all the time and I also love reading while I wait in the airport or while on a plane. I found
+							<h2 class="m-5">Katy Smith</h2>
+							<h4 class="m-5">
+								"I travel all the time and I also love reading while I wait in the airport or while on a plane. I found
 								it difficult to find new books, but with CityBookWings now I know I can find a good book every time I
 								travel.
-							</h5>
+							</h4>
 						</div>
 					</div>
 				</div>
@@ -370,11 +368,13 @@
 			<div class="row">
 				<div class="col-md-12 text-center my-5">
 					<p>&copy; 2024 CityBookWings
-						<img src="./assets/images/Citybookwingslogo.png" width="35" height="35" alt="CityBookWings logo"><br>
+						<img src="./assets/images/Citybookwingslogo.png" width="35" height="35" alt="CityBookWings logo">
+					</p>
 					<ul>
 						<li>
 							<a href="#">
-								<i class="fab fa-facebook-f icon"></i> </a>
+								<i class="fab fa-facebook-f icon"></i>
+							</a>
 						</li>
 						<li>
 							<a href="#"><i class="fab fa-twitter icon"></i></a>
@@ -387,28 +387,27 @@
 						</li>
 					</ul>
 					<p>Made with <i class="fas fa-heart"></i> by Aoife, Daniel, Joe and Michael</p>
-					<a class="nav-link m-4" href="https://github.com/AoifeEdX/city-book-wings" target="_blank"><i
-							class="fab fa-github"></i>
-						GitHub Repo</a>
-					</p>
+					<a class="nav-link m-4" href="https://github.com/AoifeEdX/city-book-wings" target="_blank">
+						<i class="fab fa-github"></i>
+						GitHub Repo
+					</a>
 				</div>
 			</div>
 		</div>
 	</footer>
 	<!-- End of Footer -->
 
-	<!-- Bootstrap JS and dependencies -->
+
+	<!-- Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="./assets/js/slideshow.js"></script>
 	<script src="./assets/js/loading.js"></script>
-
-	<script src="./assets/js/localStorage.js"></script>
 	<script src="./assets/js/cities.js"></script>
 
 	<script src="./assets/js/flights.js"></script>
 	<script src="./assets/js/books.js"></script>
-
+	<!-- End of Scripts -->
 </body>
 
 </html>
