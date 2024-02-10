@@ -8,23 +8,15 @@ function getBooks() {
 	fetch(
 		"https://openlibrary.org/search.json?q=" +
 		document.getElementById("locationTo").value +
-    "&subject=fiction"
-	) // "q=" means query, and "locationTo" is the user input that is being queried on Open Library, &subject=fiction just searches for fiction books
+		"&subject=fiction"
+	)
 		.then(function (response) {
-			// 'response' is the HTTP response object
-			return response.json(); // Convert JSON in the response body to a JavaScript object
+			// Convert JSON in the response body to a JavaScript object
+			return response.json();
 		})
 		.then(function (parsedResponse) {
 			// Use the parsed response to get the book info we want to show on the webpage
-			console.log(parsedResponse);
 
-			//flights.forEach(function (flight) {
-			// Extract relevant information from the flight data
-			//	var NumberofPages = flight.bounds[0].segments[0].flightNumber;
-			// for 
-			//var NumberofPages = parsedResponse.docs[i].number_of_pages_median
-			//console.log(NumberofPages)
-			// Create a container div for the heading and cards
 			var containerDiv = document.createElement("div");
 
 			// Add the heading to the container
@@ -46,10 +38,8 @@ function getBooks() {
 				var isbn = (book.isbn && book.isbn[0]) || "No ISBN"; // If the book has no ISBN listed on Open Library, then it will say "No ISBN"
 				var numberOfPages = (book.number_of_pages_median) || "Page number unknown";
 				var readingTime = Math.ceil((numberOfPages * 1.5) / 60)
-				//var numberOfPages =(parsedResponse.number_of_pages_median[0]) || "Unknown reading time"; 
-				//parsedResponse.docs[i].number_of_pages_median
-				//console.log(numberOfPages)
-				// var NumberofPages = parsedResponse.docs[0].number_of_pages_median
+				var sharableURL = 'https://openlibrary.org/isbn/' + isbn;
+
 				// Check if the book has cover images
 				if (book.cover_i) {
 					var coverImageUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`; // Use Open Library's cover image if there is one
@@ -65,22 +55,21 @@ function getBooks() {
 					'<img src="' +
 					coverImageUrl +
 					'" class="card-img-top book-cover" alt="Book Cover" style="height: 400px; object-fit: cover;">' +
-					'<div class="card-body d-flex flex-column">' + // Use flex-column to make the body a flex container with a vertical direction
+					'<div class="card-body d-flex flex-column">' +
 					'<h5 class="card-title">' +
 					title +
 					"</h5>" +
 					'<p class="card-text flex-grow-1"><strong>Author:</strong> ' +
 					author +
-					"<br>" + 
+					"<br>" +
 					'<strong>Number of pages:</strong> ' +
 					numberOfPages +
-					"<br>" + 
+					"<br>" +
 					'<strong>Average Reading Time:</strong> ' +
 					readingTime + " hours" +
 					"</p>" +
-					'<a href="https://openlibrary.org/isbn/' +
-					isbn +
-					'" target="_blank" class="btn button_slide slide_down mt-auto"> <i class="fa fa-book-open"></i> View Book</a>' +
+					'<a href="' + sharableURL + '" class="btn button_slide slide_down mt-auto" target="_blank"> <i class="fa fa-book-open"></i> View Book</a>' +
+					'<button class="btn button_slide slide_save mt-3" onclick="saveBookToLocalStorage(\'' + coverImageUrl + '\', \'' + title + '\', \'' + author + '\', \'' + numberOfPages + '\', \'' + readingTime + '\', \'' + sharableURL + '\')"><i class="fas fa-save"></i> Save</button>' + // Add the Save button
 					"</div>" +
 					"</div>" +
 					"</div>";
@@ -96,10 +85,28 @@ function getBooks() {
 			bookResults.appendChild(containerDiv);
 		})
 
-		// If there is an error, console log it and show an error message on the webpage
+		// If there is an error, show an error message on the webpage
 		.catch(function (error) {
-			console.error("Error fetching data:", error);
 			bookResults.innerHTML =
-				'<p class="fs-4 my-3 text-danger text-center">Error loading data. Check console for details.</p>';
+				'<p class="fs-4 my-3 text-danger text-center">Error loading data.</p>';
 		});
+}
+
+// Function to save book information to local storage
+function saveBookToLocalStorage(coverImageUrl, title, author, numberOfPages, readingTime, sharableURL) {
+	// Retrieve existing saved books from local storage or initialize an empty array
+	var savedBooks = JSON.parse(localStorage.getItem('savedBooks')) || [];
+
+	// Add the new book information to the array
+	savedBooks.push({
+			coverImageUrl: coverImageUrl,
+			title: title,
+			author: author,
+			numberOfPages: numberOfPages,
+			readingTime: readingTime,
+			sharableURL: sharableURL
+	});
+
+	// Save the updated array back to local storage
+	localStorage.setItem('savedBooks', JSON.stringify(savedBooks));
 }

@@ -1,175 +1,162 @@
 // Search flights when "Search" button is clicked...
 function getFlights() {
-  // Clear previous search results
-  var flightResults = document.getElementById("flightResults");
-  flightResults.innerHTML = "";
+	// Clear previous search results
+	var flightResults = document.getElementById("flightResults");
+	flightResults.innerHTML = "";
 
-  // Read user inputs from the form
-  var locationFrom = document.getElementById("locationFrom").value;
-  var locationTo = document.getElementById("locationTo").value;
-  var departureDate = document.getElementById("departureDate").value;
+	// Read user inputs from the form
+	var locationFrom = document.getElementById("locationFrom").value;
+	var locationTo = document.getElementById("locationTo").value;
+	var departureDate = document.getElementById("departureDate").value;
 
-  // Log user entries to the console
-  console.log("---- Search input: ----");
-  console.log("From:", locationFrom);
-  console.log("To:", locationTo);
-  console.log("Date:", departureDate);
-  console.log("-- Getting results (please wait...): --");
+	// Fetch exchange rate data
+	var exchangeRateAPIKey = "a4e7dfed1a6162f81c023788";
+	var exchangeRateURL =
+		"https://v6.exchangerate-api.com/v6/" +
+		exchangeRateAPIKey +
+		"/pair/USD/GBP";
 
-  // Fetch exchange rate data
-  //? API documentation: https://www.exchangerate-api.com/docs/pair-conversion-requests
-  var exchangeRateAPIKey = "a4e7dfed1a6162f81c023788";
-  var exchangeRateURL =
-    "https://v6.exchangerate-api.com/v6/" +
-    exchangeRateAPIKey +
-    "/pair/USD/GBP";
+	fetch(exchangeRateURL)
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (exchangeRateData) {
+			var exchangeRate = exchangeRateData.conversion_rate;
 
-  fetch(exchangeRateURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (exchangeRateData) {
-      var exchangeRate = exchangeRateData.conversion_rate;
+			const url =
+				"https://booking-com13.p.rapidapi.com/flights/one-way?location_from=" +
+				encodeURIComponent(locationFrom) +
+				"&location_to=" +
+				encodeURIComponent(locationTo) +
+				"&departure_date=" +
+				departureDate +
+				"&number_of_stops=NonstopFlights";
 
-      //? API documentation: https://rapidapi.com/ntd119/api/booking-com13
-      //? This next snippet of code is from the API site:
-      const url =
-        "https://booking-com13.p.rapidapi.com/flights/one-way?location_from=" +
-        encodeURIComponent(locationFrom) +
-        "&location_to=" +
-        encodeURIComponent(locationTo) +
-        "&departure_date=" +
-        departureDate +
-        "&number_of_stops=NonstopFlights";
+			const options = {
+				method: "GET",
+				headers: {
+					'X-RapidAPI-Key': '3b5ffebec4msh78615bdda56178ep13d71djsna0c793d231e7',
+					'X-RapidAPI-Host': 'booking-com13.p.rapidapi.com'
+				},
+			};
 
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "3f71436c3cmshf2e0a17479ecd54p1955a7jsnee17f1837d3e",
-          "X-RapidAPI-Host": "booking-com13.p.rapidapi.com",
-        },
-      };
-
-      // Fetch data from the flight API using the constructed URL and options
-      fetch(url, options)
-        .then(function (response) {
-          // 'response' is the HTTP response object
-          return response.json(); // Convert JSON in the response body to a JavaScript object
-        })
-        .then(function (data) {
-          console.log(data); // Console log the data
-          updateflightResults(data, exchangeRate); // Use the exchange rate API to convert the prices from USD to GBP
-        })
-        .catch(function (error) {
-          console.error(error); // If there is an error with the exchange rate URL, console log it
-        });
-    })
-    .catch(function (error) {
-      console.error(error); // If there is an error with the Booking.com URL, console log it
-    });
+			// Fetch data from the flight API using the constructed URL and options
+			fetch(url, options)
+				.then(function (response) {
+					return response.json();
+				})
+				.then(function (data) {
+					updateflightResults(data, exchangeRate);
+				})
+				.catch(function (error) {
+					console.error(error);
+				});
+		})
+		.catch(function (error) {
+			console.error(error);
+		});
 }
 
 // Function to update the search results on the webpage
 function updateflightResults(results, exchangeRate) {
-  // Create a container div for the heading and cards
-  var containerDiv = document.createElement("div");
+	var containerDiv = document.createElement("div");
+	containerDiv.innerHTML =
+		'<h2 class="my-5 py-5 text-center">Find flights to your travel destination...</h2>';
 
-  // Add the heading to the container
-  containerDiv.innerHTML =
-    '<h2 class="my-5 py-5 text-center">Find flights to your travel destination...</h2>';
+	if (results.status && results.data && results.data.flights) {
+		var flights = results.data.flights.slice(0, 8);
 
-  if (results.status && results.data && results.data.flights) {
-    var flights = results.data.flights.slice(0, 8); // Extract the first eight flight results
+		if (flights.length > 0) {
+			flightResults.innerHTML = "";
 
-    if (flights.length > 0) {
-      // Clear previous results in the container
-      flightResults.innerHTML = "";
+			var rowDiv = document.createElement("div");
+			rowDiv.className = "row";
 
-      // Create a row div to hold flight cards
-      var rowDiv = document.createElement("div");
-      rowDiv.className = "row";
+			flights.sort(function (a, b) {
+				var priceA = a.travelerPrices[0].price.price.value;
+				var priceB = b.travelerPrices[0].price.price.value;
+				return priceA - priceB;
+			});
 
-      // Sort flights array by price in ascending order
-      flights.sort(function (a, b) {
-        var priceA = a.travelerPrices[0].price.price.value;
-        var priceB = b.travelerPrices[0].price.price.value;
-        return priceA - priceB;
-      });
+			flights.forEach(function (flight) {
+				var flightName = flight.bounds[0].segments[0].flightNumber;
+				var airline = flight.bounds[0].segments[0].operatingCarrier.name;
+				var airportFrom = flight.bounds[0].segments[0].origin.name;
+				var airportTo = flight.bounds[0].segments[0].destination.name;
+				var departureTime = new Date(
+					flight.bounds[0].segments[0].departuredAt
+				).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+				var arrivalTime = new Date(
+					flight.bounds[0].segments[0].arrivedAt
+				).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-      // Loop through each flight result
-      flights.forEach(function (flight) {
-        // Extract relevant information from the flight data
-        var flightName = flight.bounds[0].segments[0].flightNumber;
-        var airline = flight.bounds[0].segments[0].operatingCarrier.name;
-        var airportFrom = flight.bounds[0].segments[0].origin.name;
-        var airportTo = flight.bounds[0].segments[0].destination.name;
-        var departureTime = new Date(
-          flight.bounds[0].segments[0].departuredAt
-        ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-        var arrivalTime = new Date(
-          flight.bounds[0].segments[0].arrivedAt
-        ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+				var price = flight.travelerPrices[0].price.price.value;
+				var priceString = price.toString();
+				var modifiedPriceString =
+					priceString.slice(0, -2) + "." + priceString.slice(-2);
+				var modifiedPrice = parseFloat(modifiedPriceString);
+				var priceInGBP = (modifiedPrice * exchangeRate).toFixed(2);
+				var sharableURL = flight.shareableUrl;
 
-        var price = flight.travelerPrices[0].price.price.value;
+				var cardHtml =
+					'<div class="col-md-3 mb-3">' +
+					'<div class="card h-100">' +
+					'<div class="card-body d-flex flex-column">' +
+					'<h5 class="card-title">' +
+					airline +
+					" - " +
+					flightName +
+					"</h5>" +
+					'<p class="card-text"><strong>From:</strong> ' +
+					airportFrom +
+					"<br><strong>To:</strong> " +
+					airportTo +
+					"<br><strong>Departure Time:</strong> " +
+					departureTime +
+					"<br><strong>Arrival Time:</strong> " +
+					arrivalTime +
+					"<br><strong>Price:</strong> £" +
+					priceInGBP +
+					"</p>" +
+					'<a href="' + sharableURL + '" class="btn button_slide slide_down mt-auto" target="_blank"><i class="fa fa-plane"></i> Book Flight</a>' +
+					'<button class="btn button_slide slide_save mt-3" onclick="saveFlightToLocalStorage(\'' + flightName + '\', \'' + airline + '\', \'' + airportFrom + '\', \'' + airportTo + '\', \'' + departureTime + '\', \'' + arrivalTime + '\', \'' + priceInGBP + '\', \'' + sharableURL + '\')"><i class="fas fa-save"></i> Save</button>' + // Add the Save button
+					"</div>" +
+					"</div>" +
+					"</div>";
 
-        // Convert the price to a string
-        var priceString = price.toString();
+				rowDiv.innerHTML += cardHtml;
+			});
 
-        // Insert a decimal point before the last two digits
-        var modifiedPriceString =
-          priceString.slice(0, -2) + "." + priceString.slice(-2);
+			containerDiv.appendChild(rowDiv);
+			flightResults.appendChild(containerDiv);
+		} else {
+			flightResults.innerHTML =
+				'<p class="fs-4 my-3 text-danger text-center">No flights found.</p>';
+		}
+		// If there is an error, show an error message on the webpage
+	} else {
+		flightResults.innerHTML =
+			'<p class="fs-4 my-3 text-danger text-center">Error loading data.</p>';
+	}
+}
 
-        // Convert the modified string back to a numeric format
-        var modifiedPrice = parseFloat(modifiedPriceString);
+// Function to save flight information to local storage
+function saveFlightToLocalStorage(flightName, airline, airportFrom, airportTo, departureTime, arrivalTime, price, sharableURL) {
+	// Retrieve existing saved flights from local storage or initialize an empty array
+	var savedFlights = JSON.parse(localStorage.getItem('savedFlights')) || [];
 
-        // Convert the price to GBP using the exchange rate
-        var priceInGBP = (modifiedPrice * exchangeRate).toFixed(2);
+	// Add the new flight information to the array
+	savedFlights.push({
+		flightName: flightName,
+		airline: airline,
+		airportFrom: airportFrom,
+		airportTo: airportTo,
+		departureTime: departureTime,
+		arrivalTime: arrivalTime,
+		price: price,
+		sharableURL: sharableURL
+	});
 
-		// Get link to GoToGate.com
-        var sharableURL = flight.shareableUrl;
-
-        // Format the data into Bootstrap cards for each flight, with the airline, flight number, departure and arrival airports, departure and arrival times, and a button to view the flight on Booking.com
-        var cardHtml =
-          '<div class="col-md-3 mb-3">' +
-          '<div class="card h-100">' +
-          '<div class="card-body d-flex flex-column">' +
-          '<h5 class="card-title">' +
-          airline +
-          " - " +
-          flightName +
-          "</h5>" +
-          '<p class="card-text"><strong>From:</strong> ' +
-          airportFrom +
-          "<br><strong>To:</strong> " +
-          airportTo +
-          "<br><strong>Departure Time:</strong> " +
-          departureTime +
-          "<br><strong>Arrival Time:</strong> " +
-          arrivalTime +
-          "<br><strong>Price:</strong> £" +
-          priceInGBP +
-          "</p>" +
-          '<a href= ' + sharableURL + ' class="btn button_slide slide_down mt-auto"><i class="fa fa-plane"></i> Book Flight</a>' +
-          "</div>" +
-          "</div>" +
-          "</div>";
-
-        // Append the card to the row
-        rowDiv.innerHTML += cardHtml;
-      });
-
-      // Append the row to the container
-      containerDiv.appendChild(rowDiv);
-
-      // Append the JS containerDiv to the HTML flightResults section
-      flightResults.appendChild(containerDiv);
-    } else {
-      flightResults.innerHTML =
-        '<p class="fs-4 my-3 text-danger text-center">No flights found.</p>'; // Display a message if no flights are found
-    }
-  } else {
-    flightResults.innerHTML =
-      '<p class="fs-4 my-3 text-danger text-center">Error loading data. Check console for details.</p>'; // Display an error message if the API response is unexpected
-  }
+	// Save the updated array back to local storage
+	localStorage.setItem('savedFlights', JSON.stringify(savedFlights));
 }
